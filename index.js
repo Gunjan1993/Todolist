@@ -1,3 +1,4 @@
+const dotenv=require('dotenv').config();
 const express=require('express');
 const bodyparser=require('body-parser');
 
@@ -29,10 +30,24 @@ const todo4 =new item({
 //todo2.save();
 //todo3.save();
 //todo4.save();
+const PORT=process.env.PORT|| 3000;
+mongoose.set('strictQuery',false);
+const connectDB=async()=>{
+    try{
+        const conn=await mongoose.connect(process.env.MONGO_URL);
+        console.log('Mongodb connected');
+    }
+    catch(error){
+        console.log(error);
+        process.exit(1);
+    }
+}
+connectDB().then(()=>{
+    app.listen(PORT,function(){
+        console.log("Server is running")
+    });
+})
 
-app.listen("3000",function(){
-    console.log("Server is running")
-});
 app.get("/",function(req,res){
 
     item.find().then(function(data){//reteiving the data
