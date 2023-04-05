@@ -7,8 +7,8 @@ app.set("view engine","ejs");
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 
-const mongoose=require("mongoose");
-mongoose.connect("mongodb+srv://gunjangyl99:<YKcy6aW3ERN1A61O>@cluster0.otfyw7p.mongodb.net/test");
+//const mongoose=require("mongoose");
+//mongoose.connect("mongodb+srv://gunjangyl99:<YKcy6aW3ERN1A61O>@cluster0.otfyw7p.mongodb.net/test");
 
 const trySchema=new mongoose.Schema({
     name:String
@@ -30,7 +30,7 @@ const todo4 =new item({
 todo2.save();
 todo3.save();
 todo4.save();
-/*const PORT=process.env.PORT|| 3000;
+const PORT=process.env.PORT|| 3000;
 mongoose.set('strictQuery',false);
 const connectDB=async()=>{
     try{
@@ -41,12 +41,12 @@ const connectDB=async()=>{
         console.log(error);
         process.exit(1);
     }
-}*/
-//connectDB().then(()=>{
-    app.listen(3000,function(){
+
+connectDB().then(()=>{
+    app.listen(PORT,function(){
         console.log("Server is running")
     });
-//})
+})
 
 app.get("/",function(req,res){
 
